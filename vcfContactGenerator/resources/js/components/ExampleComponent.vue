@@ -1,23 +1,29 @@
 <template>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Example Component</div>
-
-                    <div class="card-body">
-                        I'm an example component.
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div>
+        <ul>
+            <li v-for="user in users" :key="user.id">{{ user.first_name }}</li>
+        </ul>
     </div>
 </template>
 
 <script>
-    export default {
-        mounted() {
-            console.log('Component mounted.')
-        }
-    }
+import axios from "axios";
+
+export default {
+    data() {
+        return {
+            users: [],
+        };
+    },
+    mounted() {
+        axios
+            .get("https://api.canzell.com/__public__/user-service/users?key=id")
+            .then((response) => {
+                this.users = response.data;
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    },
+};
 </script>
