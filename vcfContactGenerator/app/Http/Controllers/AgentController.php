@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class AgentController extends Controller
 {
@@ -11,9 +12,24 @@ class AgentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($name)
     {
-        //
+        $name = str_replace('_', '.', $name); // Replace underscore with dot to match the API endpoint format
+        $response = Http::get('https://api.canzell.com/__public__/user-service/users', [
+            'key' => 'id',
+            'fields' => 'first_name,last_name,other_data',
+        ]);
+
+        if ($response->failed()) {
+            abort(500, 'An error occurred while fetching data from the API endpoint');
+        }
+
+        $users = $response->json();
+        $matchingUsers = array_filter($users, function ($user) use ($name) {
+            return $user['first_name'].$user['last_name'] === $name;
+        });
+
+        return response()->json($matchingUsers);
     }
 
     /**
