@@ -15,14 +15,41 @@
       <p>Phone: {{ user.phone }}</p>
       <p>Roles: {{ user.roles.join(', ') }}</p>
     </div>
+    <div class="user-card-footer">
+      <button class="btn btn-primary" @click="downloadVcf()">Download VCF</button>
+    </div>
   </div>
+
 </template>
 
 <script>
    export default {
         props: {
             user: Array
-        }
+        },
+        methods: {
+            downloadVcf() {
+            const vcfContent = `
+                BEGIN:VCARD
+                VERSION:3.0
+                FN:${this.user.first_name} ${this.user.last_name}
+                TEL:${this.user.phone}
+                EMAIL:${this.user.email}
+                CATEGORIES:${this.user.roles.join(',')}
+                END:VCARD
+                `;
+            const blob = new Blob([vcfContent], { type: 'text/vcard' });
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `${this.user.first_name}_${this.user.last_name}.vcf`;
+            link.click();
+            window.URL.revokeObjectURL(url);
+            },
+            showVcf() {
+                    this.vcfVisible = true;
+            },
+  },
     }
 </script>
 <style>
