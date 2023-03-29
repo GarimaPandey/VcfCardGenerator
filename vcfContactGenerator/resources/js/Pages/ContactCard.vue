@@ -4,13 +4,17 @@
     <div class="user-card">
         <div class="user-card-header-info">
             <div class="user-card-header">
-                <img :src="user.mug" alt="User Mugshot" />
-                <h1><b>{{ user.first_name }}    {{ user.last_name }}</b> </h1>
-                </div><div>
+                <img :src="user.mug"  />
+                <h1><b>{{ user.first_name }}    {{ user.last_name }}
+                <p>{{ user.circle }}</p></b> </h1>
+                </div>
+                <div>
+                <div></div>
                       </div>
         </div>
         <div>
             <div class="user-card-body">
+          
             <div class="svg">
                 <p>
                 <div class="actionsC">
@@ -66,7 +70,7 @@ export default {
                 FN:${this.user.first_name} ${this.user.last_name}
                 TEL;TYPE=cell:${this.user.phone}
                 EMAIL:${this.user.email}
-                CATEGORIES:${this.user.roles.join(",")}
+                JOB TITLE:${this.user.roles.join(",")}
                 END:VCARD`;
 
             const blob = new Blob([vcfContent], { type: "text/vcard" });
