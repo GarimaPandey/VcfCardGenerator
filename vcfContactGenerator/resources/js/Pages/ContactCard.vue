@@ -6,7 +6,8 @@
             <div class="user-card-header">
                 <img :src="user.mug" alt="User Mugshot" />
                 <h1><b>{{ user.first_name }}    {{ user.last_name }}</b> </h1>
-            </div>
+                </div><div>
+                      </div>
         </div>
         <div>
             <div class="user-card-body">
@@ -35,7 +36,6 @@
                 </div>
               </div>
               <div class="svg">
-             
                <button class="btn btn-primary" @click="downloadVcf()">
                 Save Contact
             </button>
@@ -110,6 +110,7 @@ button {
     height: 50px;
     border-radius: 30px;
     align-items:center;
+    margin-left:20px;
 }
 
 template {
@@ -118,9 +119,8 @@ template {
 }
 
 .qr{
-height:90px;
-width:90px;
-padding-bottom:100px;
+height:70px;
+width:70px;
 }
 
 
@@ -129,7 +129,6 @@ display:inline-block;
 width: 80px;
 height: 80px;
 padding:10px;
-
 }
 
 .actionsC
