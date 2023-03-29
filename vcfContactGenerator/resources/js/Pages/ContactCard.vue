@@ -30,12 +30,18 @@
                 </p>
               </div>
               <div class="svg">
+                <div class="qr">
+                    <qrcode :value="'http://127.0.0.1:8000/agent/' + user.first_name + user.last_name" />
+                </div>
+              </div>
+              <div class="svg">
              
                <button class="btn btn-primary" @click="downloadVcf()">
                 Save Contact
             </button>
 
               </div>
+
             </div>
         </div>
     </div>
@@ -48,13 +54,7 @@ export default {
     components: {
         Qrcode,
     },
-    data() {
-        return {
-        qrValue: `http://127.0.0.1:8000/agent/${this.user.first_name}/${this.user.last_name}`,
-        showQrCode: false,
-
-        };
-    },
+  
     props: {
         user: Array,
     },
@@ -109,6 +109,7 @@ button {
     width: 180px;
     height: 50px;
     border-radius: 30px;
+    align-items:center;
 }
 
 template {
@@ -116,10 +117,18 @@ template {
     margin: 0 auto;
 }
 
+.qr{
+height:90px;
+width:90px;
+padding-bottom:100px;
+}
+
+
 .svg{
 display:inline-block;
-width: 100px;
-  height: 100px;
+width: 80px;
+height: 80px;
+padding:10px;
 
 }
 
@@ -138,7 +147,7 @@ padding:18px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     overflow: hidden;
     width: 350px;
-    height: 400px;
+    height: 370px;
 }
 
 .user-card-header {
