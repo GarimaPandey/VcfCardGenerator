@@ -1,1 +1,1 @@
-# VcfCardGenerator
+# VcfCardGenerator LARAVEL + Vue Frontend
