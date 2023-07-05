@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Http;
 class AgentController extends Controller
 {
     function index($fullname){
-            // Replace 'id' with the actual API key
             $response = Http::get('https://api.canzell.com/__public__/user-service/users?key=id');
     
             $users = $response->json();
